@@ -26,6 +26,17 @@ class TestAdvisor(unittest.TestCase):
             output = mock_stdout.getvalue().strip()
             self.assertIn("BisonAdvisor: Message sent to all students: Test message", output)
 
+    def chatbot_class(self):
+        #import openai
+        from dotenv import load_dotenv, find_dotenv   # get the system environment variables
+        import sys  # get command line arguments        
+        from langchain.llms import OpenAI        
+        load_dotenv(find_dotenv())  # load the environment variables      
+        query = sys.argv[1] # get the argument string command line   
+        llm = OpenAI(model_name="text-davinci-003") #instantiate a Davinci LLM        
+        result = llm(query) # execute a query from command line
+        print("Query #1 (CMDLINE) *****\n" + result, end='\n')
+
 
 
 if __name__ == '__main__':
